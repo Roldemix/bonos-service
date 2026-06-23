@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bonos
+  namespace: casino
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bonos
+  template:
+    metadata:
+      labels:
+        app: bonos
+    spec:
+      containers:
+        - name: bonos
+          image: casino/bonos-service:latest
+          ports:
+            - containerPort: 8000
