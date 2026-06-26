@@ -4,11 +4,9 @@ metadata:
   name: bonos
   namespace: casino
 spec:
-
   replicas: 1
   strategy:
     type: Recreate
-
   selector:
     matchLabels:
       app: bonos
@@ -21,7 +19,7 @@ spec:
         - name: bonos
           image: 851725353324.dkr.ecr.us-east-1.amazonaws.com/casino/bonos-service:latest
           ports:
-            - containerPort: 8000
+            - containerPort: 8004
           env:
             - name: DB_HOST
               value: "postgres.casino.svc.cluster.local"
@@ -33,12 +31,3 @@ spec:
                   name: postgres-credentials
                   key: POSTGRES_USER
             - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_PASSWORD
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-credentials
-                  key: POSTGRES_DB
